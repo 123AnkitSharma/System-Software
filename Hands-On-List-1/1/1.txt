@@ -1,0 +1,33 @@
+/*
+============================================================================
+Name : 1_i.txt
+Author : ANKIT SHARMA
+Description : 
+1. Create the following types of a files using (i) shell command
+a. soft link (symlink system call)
+b. hard link (link system call)
+c. FIFO (mkfifo Library Function or mknod system call)
+          
+Date: 31st Aug, 2024.
+============================================================================
+*/
+
+1.a) ln -s <source_file> <target_link>
+     i.e ln -s 1_org.txt 1_org_softlink
+output:-
+lrwxrwxrwx 1 ankit-sharma ankit-sharma     9 Aug 27 17:20 1_org_softlink -> 1_org.txt
+
+1.b) ln <source_file> <target_link>
+     i.e ln 1_org.txt 1_org_hardlink
+output:-
+-rw-rw-r-- 3 ankit-sharma ankit-sharma    36 Aug 27 17:19 1_org_hardlink     
+
+1.c)
+mkfifo my_pipe
+Process(1) Writer:
+echo "Process 1: How are you Process 2 ?" > my_pipe
+
+Process(2) Reader:
+cat myfifo
+output:-
+Process 1: How are you Process 2 ?

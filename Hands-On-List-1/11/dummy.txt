@@ -1,0 +1,4 @@
+fd1 helped me to write down!
+fd2 helped me to write down using dup()!
+fd3 helped me to write down dup2()!
+fd4 helped me to write down fcntl()!

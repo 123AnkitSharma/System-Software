@@ -1,0 +1,169 @@
+/*
+============================================================================
+Name : 19.txt
+Author : ANKIT SHARMA
+Description : 
+        Create a FIFO file by
+            a. mknod command
+            b. mkfifo command
+            c. use strace command to find out, which command (mknod or mkfifo) is better.
+            d. mknod system call
+            e. mkfifo library function
+
+Date: 21st Sept, 2024.
+============================================================================
+*/
+
+a)using mknod command
+Input: mknod myfifo2 p
+Output: myfifo2
+
+b)using mkfifo command
+Input: mkfifo myfifo1
+Output: myfifo1
+
+c)strace mkfifo myfifo1
+execve("/usr/bin/mkfifo", ["mkfifo", "myfifo1"], 0x7ffea63aff78 /* 58 vars */) = 0
+brk(NULL)                               = 0x5fc1465e2000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x727b9db17000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=61679, ...}) = 0
+mmap(NULL, 61679, PROT_READ, MAP_PRIVATE, 3, 0) = 0x727b9db07000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=174472, ...}) = 0
+mmap(NULL, 181960, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x727b9dada000
+mmap(0x727b9dae0000, 118784, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x727b9dae0000
+mmap(0x727b9dafd000, 24576, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x23000) = 0x727b9dafd000
+mmap(0x727b9db03000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x29000) = 0x727b9db03000
+mmap(0x727b9db05000, 5832, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x727b9db05000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\220\243\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+fstat(3, {st_mode=S_IFREG|0755, st_size=2125328, ...}) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+mmap(NULL, 2170256, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x727b9d800000
+mmap(0x727b9d828000, 1605632, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x727b9d828000
+mmap(0x727b9d9b0000, 323584, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b0000) = 0x727b9d9b0000
+mmap(0x727b9d9ff000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1fe000) = 0x727b9d9ff000
+mmap(0x727b9da05000, 52624, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x727b9da05000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=625344, ...}) = 0
+mmap(NULL, 627472, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x727b9da40000
+mmap(0x727b9da42000, 450560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x727b9da42000
+mmap(0x727b9dab0000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x70000) = 0x727b9dab0000
+mmap(0x727b9dad8000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x97000) = 0x727b9dad8000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x727b9da3d000
+arch_prctl(ARCH_SET_FS, 0x727b9da3d800) = 0
+set_tid_address(0x727b9da3dad0)         = 20096
+set_robust_list(0x727b9da3dae0, 24)     = 0
+rseq(0x727b9da3e120, 0x20, 0, 0x53053053) = 0
+mprotect(0x727b9d9ff000, 16384, PROT_READ) = 0
+mprotect(0x727b9dad8000, 4096, PROT_READ) = 0
+mprotect(0x727b9db03000, 4096, PROT_READ) = 0
+mprotect(0x5fc145076000, 4096, PROT_READ) = 0
+mprotect(0x727b9db4f000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x727b9db07000, 61679)           = 0
+statfs("/sys/fs/selinux", 0x7ffe3457f120) = -1 ENOENT (No such file or directory)
+statfs("/selinux", 0x7ffe3457f120)      = -1 ENOENT (No such file or directory)
+getrandom("\xee\x2e\x80\x04\x63\xd0\xfb\x90", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x5fc1465e2000
+brk(0x5fc146603000)                     = 0x5fc146603000
+openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+read(3, "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbd"..., 1024) = 393
+read(3, "", 1024)                       = 0
+close(3)                                = 0
+access("/etc/selinux/config", F_OK)     = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=5719296, ...}) = 0
+mmap(NULL, 5719296, PROT_READ, MAP_PRIVATE, 3, 0) = 0x727b9d200000
+close(3)                                = 0
+mknodat(AT_FDCWD, "myfifo1", S_IFIFO|0666) = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+
+
+strace mknod myfifo2 p
+execve("/usr/bin/mknod", ["mknod", "myfifo2", "p"], 0x7fff61ba1250 /* 58 vars */) = 0
+brk(NULL)                               = 0x5cd953dd7000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fef2df30000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=61679, ...}) = 0
+mmap(NULL, 61679, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fef2df20000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=174472, ...}) = 0
+mmap(NULL, 181960, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fef2def3000
+mmap(0x7fef2def9000, 118784, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x7fef2def9000
+mmap(0x7fef2df16000, 24576, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x23000) = 0x7fef2df16000
+mmap(0x7fef2df1c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x29000) = 0x7fef2df1c000
+mmap(0x7fef2df1e000, 5832, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fef2df1e000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\220\243\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+fstat(3, {st_mode=S_IFREG|0755, st_size=2125328, ...}) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+mmap(NULL, 2170256, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fef2dc00000
+mmap(0x7fef2dc28000, 1605632, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7fef2dc28000
+mmap(0x7fef2ddb0000, 323584, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b0000) = 0x7fef2ddb0000
+mmap(0x7fef2ddff000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1fe000) = 0x7fef2ddff000
+mmap(0x7fef2de05000, 52624, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fef2de05000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=625344, ...}) = 0
+mmap(NULL, 627472, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fef2de59000
+mmap(0x7fef2de5b000, 450560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7fef2de5b000
+mmap(0x7fef2dec9000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x70000) = 0x7fef2dec9000
+mmap(0x7fef2def1000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x97000) = 0x7fef2def1000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fef2de56000
+arch_prctl(ARCH_SET_FS, 0x7fef2de56800) = 0
+set_tid_address(0x7fef2de56ad0)         = 20427
+set_robust_list(0x7fef2de56ae0, 24)     = 0
+rseq(0x7fef2de57120, 0x20, 0, 0x53053053) = 0
+mprotect(0x7fef2ddff000, 16384, PROT_READ) = 0
+mprotect(0x7fef2def1000, 4096, PROT_READ) = 0
+mprotect(0x7fef2df1c000, 4096, PROT_READ) = 0
+mprotect(0x5cd95247c000, 4096, PROT_READ) = 0
+mprotect(0x7fef2df68000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x7fef2df20000, 61679)           = 0
+statfs("/sys/fs/selinux", 0x7ffcd5325100) = -1 ENOENT (No such file or directory)
+statfs("/selinux", 0x7ffcd5325100)      = -1 ENOENT (No such file or directory)
+getrandom("\x7f\x24\xca\xa1\x76\xd1\x32\xd7", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x5cd953dd7000
+brk(0x5cd953df8000)                     = 0x5cd953df8000
+openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+read(3, "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbd"..., 1024) = 393
+read(3, "", 1024)                       = 0
+close(3)                                = 0
+access("/etc/selinux/config", F_OK)     = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=5719296, ...}) = 0
+mmap(NULL, 5719296, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fef2d600000
+close(3)                                = 0
+mknodat(AT_FDCWD, "myfifo2", S_IFIFO|0666) = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+
+
+-> mkfifo is better if you are simply creating a named pipe, as it is clearer and more specialized for that purpose.
+
+->mknod is useful if you need a single command to handle multiple types of special files(e.g., block or character devices), but for creating FIFOs specifically, mkfifo is generally preferred.

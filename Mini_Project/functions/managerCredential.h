@@ -1,0 +1,7 @@
+#ifndef MANAGER_CREDENTIALS
+#define MANAGER_CREDENTIALS
+
+#define MANAGER_LOGIN_ID "manager"
+#define MANAGER_PASSWORD "6611.06H9Do1k" //1000
+
+#endif
